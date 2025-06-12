@@ -72,6 +72,11 @@ class APIcml:
         labs = lab_id
         for lab in labs:
             url = f"{self.base_url}/labs/{lab}"
+    
+
+    def get_nodes(self):
+        nodes = APIcml.make_request(self,endpoint='nodes')
+                
             
         
 
