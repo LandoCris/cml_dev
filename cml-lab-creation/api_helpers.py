@@ -61,7 +61,8 @@ class APIcml:
             
             # Assuming the response is JSON
             data = response.json()
-            print("Response data:", json.dumps(data, indent=4))  # Pretty print the JSON response
+            #print("Response data:", json.dumps(data, indent=4))  # Pretty print the JSON response
+            return data
             
         except requests.exceptions.RequestException as e:
             print(f"Request to {endpoint} failed: {e}")
@@ -69,13 +70,14 @@ class APIcml:
     
     def lab_inventory(self):
         lab_id = APIcml.make_request(self,endpoint='labs')
-        labs = lab_id
-        for lab in labs:
-            url = f"{self.base_url}/labs/{lab}"
-    
+        for lab in lab_id:
+            labs_name = APIcml.make_request(self,endpoint=f'labs/{lab}')
+            print(labs_name)
+  
 
     def get_nodes(self):
         nodes = APIcml.make_request(self,endpoint='nodes')
+
                 
             
         
@@ -88,6 +90,9 @@ pass_in = input("|Password> ")
 init_api = APIcml(username=user_in,password=pass_in,base_url=url_in,ssl_verify=False)
 APIcml.api_auth(init_api)
 APIcml.lab_inventory(init_api)
+#APIcml.get_nodes(init_api)
+
+
 
 
 
